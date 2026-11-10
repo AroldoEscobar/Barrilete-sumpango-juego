@@ -1,0 +1,1 @@
+{"name":"barrilete","private":true,"description":"Barrilete: juego arcade para Build & Play","scripts":{"build":"node build.mjs"}}
