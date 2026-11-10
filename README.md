@@ -31,17 +31,28 @@ cuerda para mantenerlo en el aire.
 ## Build
 
 ```
-node build.mjs          # genera index.html (el que se publica)
-node build.mjs --dev    # genera index.dev.html, sin renombrar, para pruebas
+npm install             # solo la primera vez: esbuild y terser, dependencias de desarrollo
+npm run build           # genera index.html (el que se publica)
+npm run build:dev       # genera index.dev.html, legible, con window.__game para pruebas
 ```
 
-El build mete `src/game.js` dentro de `src/index.html` y lo minifica con
-`npx terser`, que solo se usa al compilar. Si terser no está disponible, deja
-el código sin minificar y avisa. Para jugar, abre `index.html` en el navegador.
+esbuild junta los módulos de `src/` en un solo script, terser lo minifica y el
+resultado se inserta en `src/index.html`. Ninguna de las dos herramientas llega
+al juego: el navegador solo baja `index.html`, sin código de librerías. Para
+jugar, abre `index.html` en el navegador.
 
 ## Estructura
 
-- `src/index.html`: plantilla con el estilo y el canvas.
-- `src/game.js`: todo el juego, en este orden: constantes y datos, dibujo,
-  viento, audio, barrilete y fondo, física y reglas, pantallas, entrada.
-- `build.mjs`: arma y minifica el archivo final.
+```
+src/
+  index.html        plantilla con el estilo y el canvas
+  main.js           arranque y bucle de juego
+  config/           colores, constantes y catálogos de personalización
+  core/             estado compartido, almacenamiento y matemáticas
+  game/             reglas: viento, hilo, papel, rivales, controles, salvavidas
+  render/           dibujo: primitivas, fondo, barrilete, muñeco, escena y HUD
+  audio/            sonidos con Web Audio
+  input/            puntero, teclado y menús
+  screens/          menú, personalizar, instrucciones y puntuaciones
+build.mjs           arma y minifica el index.html final
+```

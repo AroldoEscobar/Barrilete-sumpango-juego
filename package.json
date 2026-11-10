@@ -1,1 +1,14 @@
-{"name":"barrilete","private":true,"description":"Barrilete: juego arcade para Build & Play","scripts":{"build":"node build.mjs"}}
+{
+  "name": "barrilete",
+  "private": true,
+  "type": "module",
+  "description": "Barrilete: juego arcade para Build & Play",
+  "scripts": {
+    "build": "node build.mjs",
+    "build:dev": "node build.mjs --dev"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "terser": "^5.51.2"
+  }
+}
